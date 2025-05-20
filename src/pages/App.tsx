@@ -1,33 +1,35 @@
-import { Button } from "./components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./components/ui/select";
+} from "../components/ui/select";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "./components/ui/form";
+} from "../components/ui/form";
 import { useForm } from "react-hook-form";
 import EmptyState from "@/assets/empty-cart-512.webp";
+import api from "@/service/APIService";
 
 function App() {
   const form = useForm({
     defaultValues: {
       path: "",
       arraySize: "5",
-      algorithimn: "mergeSort",
+      algorithm: "mergeSort",
     },
   });
 
   const onSubmit = (formData) => {
     console.log(formData);
     // bater no backend
+    const response = api.post("/benchmark", formData);
 
     // Esperar a resposta
 
@@ -62,7 +64,7 @@ function App() {
 
           <div className="flex gap-x-2 items-center">
             <FormField
-              name="algorithimn"
+              name="algorithm"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
